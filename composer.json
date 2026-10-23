@@ -1,0 +1,45 @@
+{
+    "name": "kate-kulikova/odds-compare-kate",
+    "description": "Live odds comparison for WordPress: pluggable odds providers, cached fetching, admin settings and a Gutenberg block.",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Kate Kulikova",
+            "email": "kykilab@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/php-compatibility": "^10.0@alpha",
+        "phpcompatibility/phpcompatibility-paragonie": "^2.0@alpha",
+        "phpcompatibility/phpcompatibility-wp": "^3.0@alpha",
+        "phpunit/phpunit": "^11.5 || ^12.0",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "OddsCompare\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OddsCompare\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "phpcs",
+        "lint:fix": "phpcbf",
+        "test": "phpunit"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "sort-packages": true
+    }
+}
