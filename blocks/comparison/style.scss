@@ -1,0 +1,374 @@
+// Card with a header, a price table and a footer. Colours are custom
+// properties so a theme can restyle without touching the plugin. The block is
+// a container query root, so the stacked layout kicks in whenever the block
+// itself is narrow, not only on small screens.
+
+.wp-block-odds-compare-comparison {
+	--oc-accent: #15803d;
+	--oc-accent-text: #fff;
+	--oc-accent-soft: #dcfce7;
+	--oc-surface: #fff;
+	--oc-surface-alt: #f6f8fa;
+	--oc-border: #e4e7eb;
+	--oc-muted: #6b7280;
+	--oc-stale: #b45309;
+	--oc-radius: 14px;
+	--oc-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 12px 32px -16px rgba(16, 24, 40, 0.18);
+
+	container-type: inline-size;
+	box-sizing: border-box;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+	border: 1px solid var(--oc-border);
+	border-radius: var(--oc-radius);
+	background: var(--oc-surface);
+	box-shadow: var(--oc-shadow);
+	overflow: hidden;
+	font-size: 1rem;
+	line-height: 1.4;
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	// Header -----------------------------------------------------------------
+
+	.odds-compare__header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 0.75em 1.5em;
+		padding: 1.25em 1.5em 1em;
+	}
+
+	.odds-compare__title {
+		margin: 0 0 0.3em;
+		font-size: 1.35em;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.odds-compare__event {
+		margin: 0;
+		font-size: 1em;
+	}
+
+	.odds-compare__meta {
+		display: block;
+		margin-top: 0.15em;
+		color: var(--oc-muted);
+		font-size: 0.875em;
+	}
+
+	.odds-compare__format {
+		display: inline-flex;
+		padding: 3px;
+		border: 1px solid var(--oc-border);
+		border-radius: 999px;
+		background: var(--oc-surface-alt);
+
+		button {
+			margin: 0;
+			padding: 0.4em 1em;
+			border: 0;
+			border-radius: 999px;
+			background: transparent;
+			color: var(--oc-muted);
+			font: inherit;
+			font-size: 0.85em;
+			font-weight: 600;
+			line-height: 1.2;
+			cursor: pointer;
+			transition: background-color 0.15s ease, color 0.15s ease;
+
+			&:hover {
+				color: inherit;
+			}
+
+			&[aria-pressed="true"] {
+				background: var(--oc-surface);
+				color: var(--oc-accent);
+				box-shadow: 0 1px 2px rgba(16, 24, 40, 0.12);
+			}
+
+			&:focus-visible {
+				outline: 2px solid var(--oc-accent);
+				outline-offset: 1px;
+			}
+		}
+	}
+
+	// Table ------------------------------------------------------------------
+
+	.odds-compare__scroll {
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.odds-compare__table {
+		width: 100%;
+		margin: 0;
+		border: 0;
+		border-collapse: collapse;
+		font-size: 1em;
+
+		th,
+		td {
+			padding: 0.8em 1em;
+			border: 0;
+			border-top: 1px solid var(--oc-border);
+			text-align: center;
+			vertical-align: middle;
+			white-space: nowrap;
+		}
+
+		thead th {
+			padding-top: 0.7em;
+			padding-bottom: 0.7em;
+			border-top: 0;
+			background: var(--oc-surface-alt);
+			color: var(--oc-muted);
+			font-size: 0.75em;
+			font-weight: 600;
+			letter-spacing: 0.06em;
+			text-transform: uppercase;
+		}
+
+		th[scope="row"],
+		thead th:first-child {
+			padding-left: 1.5em;
+			text-align: left;
+		}
+
+		td:last-child,
+		thead th:last-child {
+			padding-right: 1.5em;
+			text-align: right;
+		}
+
+		tbody tr {
+			transition: background-color 0.15s ease;
+
+			&:hover {
+				background: var(--oc-surface-alt);
+			}
+		}
+	}
+
+	.odds-compare__bookmaker {
+		font-weight: 600;
+	}
+
+	.odds-compare__avatar {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.1em;
+		height: 2.1em;
+		margin-right: 0.6em;
+		border: 1px solid var(--oc-border);
+		border-radius: 50%;
+		background: var(--oc-surface-alt);
+		color: var(--oc-accent);
+		font-size: 0.9em;
+		font-weight: 700;
+		vertical-align: middle;
+	}
+
+	.odds-compare__name {
+		vertical-align: middle;
+	}
+
+	.odds-compare__odds {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: 4.6em;
+		padding: 0.4em 0.75em;
+		border: 1px solid var(--oc-border);
+		border-radius: 999px;
+		background: var(--oc-surface);
+		font-variant-numeric: tabular-nums;
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	.odds-compare__odds--empty {
+		border-color: transparent;
+		color: var(--oc-muted);
+		font-weight: 400;
+	}
+
+	.odds-compare__cell.is-best .odds-compare__odds {
+		border-color: var(--oc-accent);
+		background: var(--oc-accent);
+		color: var(--oc-accent-text);
+	}
+
+	.odds-compare__line {
+		display: block;
+		margin-top: 0.3em;
+		color: var(--oc-muted);
+		font-size: 0.75em;
+		font-weight: 400;
+	}
+
+	.odds-compare__button {
+		display: inline-block;
+		padding: 0.45em 1.1em;
+		border: 1px solid var(--oc-accent);
+		border-radius: 999px;
+		color: var(--oc-accent);
+		font-size: 0.85em;
+		font-weight: 600;
+		line-height: 1.2;
+		text-decoration: none;
+		white-space: nowrap;
+		transition: background-color 0.15s ease, color 0.15s ease;
+
+		&:hover,
+		&:focus {
+			background: var(--oc-accent);
+			color: var(--oc-accent-text);
+			text-decoration: none;
+		}
+	}
+
+	// Footer -----------------------------------------------------------------
+
+	.odds-compare__footer {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25em 1.25em;
+		padding: 0.9em 1.5em 1em;
+		border-top: 1px solid var(--oc-border);
+		background: var(--oc-surface-alt);
+		color: var(--oc-muted);
+		font-size: 0.8em;
+	}
+
+	.odds-compare__stale {
+		color: var(--oc-stale);
+	}
+
+	.odds-compare__message {
+		margin: 0;
+		padding: 1.5em;
+		color: var(--oc-muted);
+		text-align: center;
+	}
+
+	// Stacked layout for narrow blocks ---------------------------------------
+	// One card per bookmaker: name and button on top, outcomes below with
+	// their labels.
+
+	@container (max-width: 640px) {
+
+		.odds-compare__header {
+			align-items: stretch;
+			flex-direction: column;
+			padding: 1.1em 1.25em 0.9em;
+		}
+
+		.odds-compare__format {
+			display: flex;
+			width: 100%;
+
+			button {
+				flex: 1 1 0;
+				padding: 0.45em 0.4em;
+				font-size: 0.8em;
+				text-align: center;
+			}
+		}
+
+		.odds-compare__table,
+		.odds-compare__table tbody {
+			display: block;
+		}
+
+		.odds-compare__table thead {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			overflow: hidden;
+			clip-path: inset(50%);
+		}
+
+		// Each row is a card: name and button on the first line, outcomes below.
+		.odds-compare__table tbody tr {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			gap: 0.75em 0.5em;
+			padding: 1em 1.25em;
+			border-top: 1px solid var(--oc-border);
+		}
+
+		.odds-compare__table th,
+		.odds-compare__table td {
+			display: block;
+			padding: 0;
+			border: 0;
+			white-space: normal;
+		}
+
+		// Name takes the first line (no shrinking below 60%) with the button
+		// beside it, so the outcome cells always wrap to the second line.
+		.odds-compare__table th[scope="row"] {
+			order: -2;
+			flex: 1 0 60%;
+			padding-left: 0;
+		}
+
+		.odds-compare__table td.odds-compare__cta {
+			order: -1;
+			flex: 0 0 auto;
+			padding-right: 0;
+		}
+
+		// Labels can wrap to two lines; pushing the pill to the bottom keeps
+		// the pills of a row aligned.
+		.odds-compare__table td.odds-compare__cell {
+			display: flex;
+			flex: 1 1 0;
+			flex-direction: column;
+			align-self: stretch;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 0.35em;
+			min-width: 5em;
+			padding: 0;
+			text-align: center;
+
+			&::before {
+				content: attr(data-label);
+				color: var(--oc-muted);
+				font-size: 0.68em;
+				font-weight: 600;
+				letter-spacing: 0.05em;
+				text-align: center;
+				text-transform: uppercase;
+			}
+		}
+
+		.odds-compare__odds {
+			width: 100%;
+		}
+
+		.odds-compare__footer {
+			padding-left: 1.25em;
+			padding-right: 1.25em;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+
+		* {
+			transition: none !important;
+		}
+	}
+}

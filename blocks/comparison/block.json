@@ -1,0 +1,77 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "odds-compare/comparison",
+	"version": "1.0.0",
+	"title": "Odds Comparison",
+	"category": "widgets",
+	"icon": "chart-bar",
+	"description": "Compare bookmakers' odds for one event, with the best price highlighted.",
+	"keywords": [
+		"odds",
+		"betting",
+		"bookmaker",
+		"comparison"
+	],
+	"textdomain": "odds-compare-kate",
+	"attributes": {
+		"align": {
+			"type": "string",
+			"default": "wide"
+		},
+		"sportKey": {
+			"type": "string",
+			"default": ""
+		},
+		"eventId": {
+			"type": "string",
+			"default": ""
+		},
+		"eventTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"market": {
+			"type": "string",
+			"default": ""
+		},
+		"bookmakers": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "string"
+			}
+		},
+		"format": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"default": ""
+		},
+		"highlightBest": {
+			"type": "boolean",
+			"default": true
+		},
+		"showUpdated": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"spacing": {
+			"margin": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"render": "file:./render.php"
+}
